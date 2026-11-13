@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Chat rooms</title>
+<style>
+  body { font-family: Arial, sans-serif; margin: 2rem; max-width: 40rem; }
+  pre { background: #f2f2f2; padding: 1rem; }
+</style>
+</head>
+<body>
+<h1>Chat rooms</h1>
+<p>This page lives on <code>http://127.0.0.1:5500</code>. The API lives on <code>http://127.0.0.1:8000</code>: another origin.</p>
+<button id="load">Load rooms</button>
+<pre id="out">Press the button. If nothing appears, open the console (F12).</pre>
+<script>
+document.getElementById("load").onclick = async () => {
+  const out = document.getElementById("out");
+  try {
+    const response = await fetch("http://127.0.0.1:8000/rooms");
+    out.textContent = JSON.stringify(await response.json(), null, 2);
+  } catch (error) {
+    out.textContent = "Blocked: " + error + "\nRead the red line in the console.";
+  }
+};
+</script>
+</body>
+</html>

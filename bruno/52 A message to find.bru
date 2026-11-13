@@ -1,0 +1,23 @@
+meta {
+  name: 52 A message to find
+  type: http
+  seq: 52
+}
+
+post {
+  url: {{baseUrl}}/rooms/{{search_room}}/messages
+  body: json
+  auth: bearer
+}
+
+auth:bearer {
+  token: {{token}}
+}
+
+body:json {
+  {"text": "where is the meeting?"}
+}
+
+assert {
+  res.status: eq 201
+}

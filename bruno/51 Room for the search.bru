@@ -1,0 +1,23 @@
+meta {
+  name: 51 Room for the search
+  type: http
+  seq: 51
+}
+
+post {
+  url: {{baseUrl}}/rooms
+  body: json
+  auth: none
+}
+
+body:json {
+  {"title": "search"}
+}
+
+script:post-response {
+  bru.setEnvVar("search_room", res.body.id);
+}
+
+assert {
+  res.status: eq 201
+}
